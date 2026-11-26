@@ -1,0 +1,71 @@
+name: Build and Release RoyalRepairShop v5.0.1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up 32-bit Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          architecture: 'x86'
+
+      - name: Verify Python architecture
+        shell: pwsh
+        run: |
+          python -c "import struct; print('Python bits:', struct.calcsize('P') * 8); assert struct.calcsize('P') * 8 == 32"
+
+      - name: Install PyInstaller
+        run: python -m pip install --upgrade pip pyinstaller
+
+      - name: Build Windows executable
+        shell: pwsh
+        run: |
+          if (!(Test-Path 'RoyalRepairShop_DeviceReplacement_FIXED_UPDATER.py')) {
+            throw 'Source file RoyalRepairShop_DeviceReplacement_FIXED_UPDATER.py was not found in the repository root.'
+          }
+          python -m PyInstaller --noconfirm --clean --onefile --windowed --name RoyalRepairShop RoyalRepairShop_DeviceReplacement_FIXED_UPDATER.py
+          if (!(Test-Path 'dist/RoyalRepairShop.exe')) { throw 'EXE build failed.' }
+          $hash = (Get-FileHash 'dist/RoyalRepairShop.exe' -Algorithm SHA256).Hash.ToLower()
+          $manifest = [ordered]@{
+            update_version = '5.0.1'
+            display_version = '5.0.1'
+            file = 'RoyalRepairShop.exe'
+            sha256 = $hash
+            url = 'https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.1/RoyalRepairShop.exe'
+            changelog = @('نسخه جدید شامل گزارش ورود کاربران و امکانات فایل برنامه بارگذاری‌شده است.', 'ساخت ۳۲ بیتی؛ قابل اجرا روی ویندوز ۳۲ و ۶۴ بیتی')
+          }
+          $manifest | ConvertTo-Json -Depth 5 | Set-Content -Path version.json -Encoding utf8
+
+      - name: Upload EXE as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: RoyalRepairShop-Windows-32bit-v5.0.1
+          path: dist/RoyalRepairShop.exe
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Commit update manifest
+        shell: pwsh
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add version.json
+          git commit -m 'Publish RoyalRepairShop v5.0.1 update manifest' || Write-Output 'No manifest changes to commit.'
+          git push
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          gh release create v5.0.1 dist/RoyalRepairShop.exe --title 'RoyalRepairShop v5.0.1' --notes 'نسخه ۵.۰.۱ برنامه تعمیرگاه رویال. فایل ۳۲ بیتی برای ویندوزهای ۳۲ و ۶۴ بیتی.'
