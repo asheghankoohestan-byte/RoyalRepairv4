@@ -15,9 +15,9 @@ import webbrowser
 import html
 import shutil
 
-APP_VERSION = "1.0.4"  # نسخه‌ای که به کاربر نمایش داده می‌شود
-UPDATE_VERSION = "1.3.5"  # نسخه داخلی و پیوسته برای مقایسه آپدیت‌ها
-UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/asheghankoohestan-byte/RoyalRepairv4/main/version.json?v=1.3.5"
+APP_VERSION = "5.0.0"  # نسخه‌ای که به کاربر نمایش داده می‌شود
+UPDATE_VERSION = "5.0.0"  # نسخه داخلی و پیوسته برای مقایسه آپدیت‌ها
+UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/asheghankoohestan-byte/RoyalRepairv4/main/version.json?v=5.0.0"
 BASE_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
 DB = BASE_DIR / "tamirat.db"
 
