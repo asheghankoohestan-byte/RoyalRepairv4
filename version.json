@@ -1,13 +1,13 @@
 {
-  "version": "1.3.5",
-  "update_version": "1.3.5",
-  "display_version": "1.0.4",
-  "file": "RoyalRepair-v04.exe",
-  "sha256": "cc160595ac0701915a49e28baf03f22defa3d7477f9b4bf416691cece51ae14f",
-  "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/%D9%88%D8%B1%DA%98%D9%861/RoyalRepair-v04.exe",
+  "version": "5.0.0",
+  "update_version": "5.0.0",
+  "display_version": "5.0.0",
+  "file": "RoyalRepairShop.exe",
+  "sha256": "75e2277ff7dda86dbe8abb8d11301cc5ebed7fe909695b9ab55e1fad9d5f6900",
+  "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.0/RoyalRepairShop.exe",
   "changelog": [
-    "رفع خطای 404 در بررسی به‌روزرسانی",
-    "اتصال بررسی نسخه به مخزن RoyalRepairv4",
-    "دریافت فایل از انتشار رسمی GitHub"
+    "انتشار نسخه ۵ برنامه RoyalRepairShop",
+    "به‌روزرسانی سیستم دریافت نسخه‌های جدید",
+    "ساخت فایل اجرایی ۳۲ بیتی سازگار با ویندوزهای ۳۲ و ۶۴ بیتی"
   ]
 }
