@@ -1,0 +1,39 @@
+name: Build RoyalRepairShop for 32-bit and 64-bit Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Build a 32-bit EXE: it runs on 32-bit Windows and also on 64-bit Windows.
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up 32-bit Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          architecture: "x86"
+
+      - name: Verify Python architecture
+        shell: pwsh
+        run: |
+          python -c "import struct,sys; print(sys.version); print(f'{struct.calcsize(chr(80))*8}-bit Python'); assert struct.calcsize('P')*8 == 32"
+
+      - name: Install PyInstaller
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pyinstaller>=6,<7"
+
+      - name: Build Windows EXE
+        run: |
+          python -m PyInstaller --noconfirm --clean --onefile --windowed --name RoyalRepairShop_Windows_32-64 "RoyalRepairShop_DeviceReplacement_FIXED_UPDATER.py"
+
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: RoyalRepairShop-Windows-32-and-64-bit
+          path: dist/RoyalRepairShop_Windows_32-64.exe
+          if-no-files-found: error
