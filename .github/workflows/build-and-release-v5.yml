@@ -38,21 +38,20 @@ jobs:
         shell: pwsh
         run: |
           $hash = (Get-FileHash "dist/RoyalRepairShop.exe" -Algorithm SHA256).Hash.ToLower()
-          @"
-          {
-            "version": "5.0.0",
-            "update_version": "5.0.0",
-            "display_version": "5.0.0",
-            "file": "RoyalRepairShop.exe",
-            "sha256": "$hash",
-            "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.0/RoyalRepairShop.exe",
-            "changelog": [
+          $manifest = [ordered]@{
+            version = "5.0.0"
+            update_version = "5.0.0"
+            display_version = "5.0.0"
+            file = "RoyalRepairShop.exe"
+            sha256 = $hash
+            url = "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.0/RoyalRepairShop.exe"
+            changelog = @(
               "انتشار نسخه ۵ برنامه RoyalRepairShop",
               "به‌روزرسانی سیستم دریافت نسخه‌های جدید",
               "ساخت فایل اجرایی ۳۲ بیتی سازگار با ویندوزهای ۳۲ و ۶۴ بیتی"
-            ]
+            )
           }
-          "@ | Set-Content -Path version.json -Encoding utf8
+          $manifest | ConvertTo-Json -Depth 5 | Set-Content -Path version.json -Encoding utf8
 
       - name: Commit update manifest
         shell: pwsh
