@@ -1,0 +1,37 @@
+name: Build RoyalRepairShop 32-bit EXE
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "RoyalRepairShop_DeviceReplacement(2).py"
+      - ".github/workflows/build-32bit.yml"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11 (32-bit)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          architecture: "x86"
+
+      - name: Install PyInstaller
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "pyinstaller>=6,<7"
+
+      - name: Build Windows 32-bit EXE
+        run: |
+          python -m PyInstaller --noconfirm --clean --onefile --windowed --name RoyalRepairShop_32bit --collect-all tkinter "RoyalRepairShop_DeviceReplacement(2).py"
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: RoyalRepairShop-32bit-EXE
+          path: dist/RoyalRepairShop_32bit.exe
+          if-no-files-found: error
