@@ -2311,9 +2311,17 @@ if CURRENT_USER.get("role") == "admin":
     tk.Label(
         users_panel, text=f"کاربر واردشده: {CURRENT_USER['username']}  |  سطح دسترسی: مدیر",
         bg="#f3f6fb", fg="#53657d", font=(default_font, 9)
-    ).pack(side="right", padx=8)
-    ttk.Button(users_panel, text="مدیریت کاربران", command=open_user_manager).pack(side="left", padx=6)
-    ttk.Button(users_panel, text="گزارش ورود کاربران", command=open_login_report).pack(side="left", padx=6)
+    ).pack(anchor="e", padx=8, pady=(0, 7))
+
+    # دکمه‌ها در یک ردیف مستقل قرار می‌گیرند تا در پنجره‌های کوچک هم دیده شوند.
+    users_actions = tk.Frame(users_panel, bg="#f3f6fb")
+    users_actions.pack(fill="x", padx=4, pady=(0, 2))
+    ttk.Button(
+        users_actions, text="گزارش ورود کاربران", command=open_login_report, width=17
+    ).pack(side="right", padx=(3, 6), ipadx=1, ipady=1)
+    ttk.Button(
+        users_actions, text="مدیریت کاربران", command=open_user_manager, width=16
+    ).pack(side="right", padx=3, ipadx=1, ipady=1)
 
 font_family_var = tk.StringVar(value=default_font)
 font_size_var = tk.StringVar(value="10")
