@@ -17,5 +17,9 @@
     }
   },
   "update_version": "5.0.4",
-  "display_version": "5.0.4"
+  "display_version": "5.0.4",
+  "version": "5.0.4",
+  "file": "RoyalRepairShop-x64.exe",
+  "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.4/RoyalRepairShop-x64.exe",
+  "sha256": "610313a14d03b826657b9c1c277ee178847a1a22331ebee2d2d5526576cfc60a"
 }
