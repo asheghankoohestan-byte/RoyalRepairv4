@@ -14,10 +14,11 @@ import urllib.request
 import webbrowser
 import html
 import shutil
+import struct
 
-APP_VERSION = "1.0.4"  # نسخه‌ای که به کاربر نمایش داده می‌شود
-UPDATE_VERSION = "1.3.5"  # نسخه داخلی و پیوسته برای مقایسه آپدیت‌ها
-UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/asheghankoohestan-byte/RoyalRepairv4/main/version.json?v=1.3.5"
+APP_VERSION = "5.0.2"  # نسخه‌ای که به کاربر نمایش داده می‌شود
+UPDATE_VERSION = "5.0.2"  # نسخه داخلی و پیوسته برای مقایسه آپدیت‌ها
+UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/asheghankoohestan-byte/RoyalRepairv4/main/version.json"
 BASE_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
 DB = BASE_DIR / "tamirat.db"
 
@@ -218,9 +219,21 @@ def check_for_updates(show_current=True):
         latest_display = str(
             manifest.get("display_version") or manifest.get("version", "")
         ).strip()
-        filename = str(manifest.get("file", "")).strip()
-        expected_hash = str(manifest.get("sha256", "")).strip().lower()
-        download_url = str(manifest.get("url", "")).strip()
+        # انتخاب فایل دقیقاً مطابق معماری همین نسخه از برنامه (۳۲ یا ۶۴ بیت)
+        architecture = "x64" if struct.calcsize("P") * 8 == 64 else "x86"
+        architecture_files = manifest.get("architectures")
+        if isinstance(architecture_files, dict):
+            build = architecture_files.get(architecture)
+            if not isinstance(build, dict):
+                raise ValueError(f"فایل به‌روزرسانی نسخه {architecture} در انتشار موجود نیست.")
+            filename = str(build.get("file", "")).strip()
+            expected_hash = str(build.get("sha256", "")).strip().lower()
+            download_url = str(build.get("url", "")).strip()
+        else:
+            # سازگاری با manifest قدیمی؛ فقط وقتی معماری جداگانه تعریف نشده است.
+            filename = str(manifest.get("file", "")).strip()
+            expected_hash = str(manifest.get("sha256", "")).strip().lower()
+            download_url = str(manifest.get("url", "")).strip()
         notes = manifest.get("changelog", [])
 
         if not latest_update or not latest_display or not filename or Path(filename).name != filename:
