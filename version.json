@@ -1,18 +1,18 @@
 {
-  "update_version": "5.0.3",
-  "display_version": "5.0.3",
   "architectures": {
     "x64": {
+      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.3/RoyalRepairShop-x64.exe",
       "file": "RoyalRepairShop-x64.exe",
-      "sha256": "31ef8f57d225fa6c35232af26cfaa4b13c7c486a54aaf46f8c9e1d317e8771fa",
-      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.3/RoyalRepairShop-x64.exe"
+      "sha256": "a436848d7c3f003f8438f9c125b9078f45229f58bbf3916f8631aa85991bb755"
     },
     "x86": {
+      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.3/RoyalRepairShop-x86.exe",
       "file": "RoyalRepairShop-x86.exe",
-      "sha256": "e1ba9799f9c53607c2f83e8e61411f38337fb57b606f4bf206a2a1fe93dde7f2",
-      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.3/RoyalRepairShop-x86.exe"
+      "sha256": "e2f979ca0e3eaa1c75b7c8c5047f31ea2e02f86dbee19517801e80d9f5846d73"
     }
   },
+  "display_version": "5.0.3",
+  "update_version": "5.0.3",
   "changelog": [
     "به‌روزرسانی خودکار اصلاح شد و فایل مناسب معماری ویندوز انتخاب می‌شود.",
     "نسخه‌های ۳۲ و ۶۴ بیتی به‌صورت جداگانه منتشر می‌شوند.",
