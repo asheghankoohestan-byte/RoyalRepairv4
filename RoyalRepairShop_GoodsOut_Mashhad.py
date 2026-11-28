@@ -16,8 +16,8 @@ import html
 import shutil
 import struct
 
-APP_VERSION = "5.0.3"  # نسخه‌ای که به کاربر نمایش داده می‌شود
-UPDATE_VERSION = "5.0.3"  # نسخه داخلی و پیوسته برای مقایسه آپدیت‌ها
+APP_VERSION = "5.0.4"  # نسخه‌ای که به کاربر نمایش داده می‌شود
+UPDATE_VERSION = "5.0.4"  # نسخه داخلی و پیوسته برای مقایسه آپدیت‌ها
 UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/asheghankoohestan-byte/RoyalRepairv4/main/version.json"
 BASE_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
 DB = BASE_DIR / "tamirat.db"
@@ -653,10 +653,10 @@ def show_login():
     """نمایش فرم ورود؛ پس از سه تلاش ناموفق، ورود برای ۱۵ دقیقه قفل می‌شود."""
     login = tk.Toplevel(root)
     login.title("ورود به مدیریت تعمیرگاه رویال")
-    login.geometry("360x285")
+    login.geometry("360x305")
     login.resizable(False, False)
     login.update_idletasks()
-    _lw, _lh = 360, 285
+    _lw, _lh = 360, 305
     _lx = max(0, (login.winfo_screenwidth() - _lw) // 2)
     _ly = max(0, (login.winfo_screenheight() - _lh) // 2)
     login.geometry(f"{_lw}x{_lh}+{_lx}+{_ly}")
@@ -669,6 +669,8 @@ def show_login():
              font=("Segoe UI", 14, "bold")).pack(pady=(12, 2))
     tk.Label(login, text="ورود به سامانه مدیریت تعمیرگاه",
              bg="#eef3fa", fg="#53657d", font=(default_font, 9, "bold")).pack(pady=(0, 9))
+    tk.Label(login, text=f"شماره نسخه برنامه: {APP_VERSION}",
+             bg="#eef3fa", fg="#2878a8", font=(default_font, 9, "bold")).pack(pady=(0, 8))
 
     panel = tk.Frame(login, bg="white", padx=17, pady=11,
                      highlightbackground="#d5deea", highlightthickness=1)
