@@ -1,11 +1,21 @@
 {
-  "update_version": "5.0.1",
-  "display_version": "5.0.1",
-  "file": "RoyalRepairShop.exe",
-  "sha256": "1d92cc36aeae8520dd8dd620d5901f0227d66d6b5c6d87d0aa27d0d9dbd27aa1",
-  "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.1/RoyalRepairShop.exe",
+  "update_version": "5.0.3",
+  "display_version": "5.0.3",
+  "architectures": {
+    "x64": {
+      "file": "RoyalRepairShop-x64.exe",
+      "sha256": "31ef8f57d225fa6c35232af26cfaa4b13c7c486a54aaf46f8c9e1d317e8771fa",
+      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.3/RoyalRepairShop-x64.exe"
+    },
+    "x86": {
+      "file": "RoyalRepairShop-x86.exe",
+      "sha256": "e1ba9799f9c53607c2f83e8e61411f38337fb57b606f4bf206a2a1fe93dde7f2",
+      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.3/RoyalRepairShop-x86.exe"
+    }
+  },
   "changelog": [
-    "نسخه جدید شامل گزارش ورود کاربران و امکانات فایل برنامه بارگذاری‌شده است.",
-    "ساخت ۳۲ بیتی؛ قابل اجرا روی ویندوز ۳۲ و ۶۴ بیتی"
+    "به‌روزرسانی خودکار اصلاح شد و فایل مناسب معماری ویندوز انتخاب می‌شود.",
+    "نسخه‌های ۳۲ و ۶۴ بیتی به‌صورت جداگانه منتشر می‌شوند.",
+    "پیش از جایگزینی برنامه، از پایگاه داده با تاریخ شمسی پشتیبان تهیه می‌شود."
   ]
 }
