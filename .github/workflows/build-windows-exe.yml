@@ -6,7 +6,7 @@ on:
       version:
         description: "شماره نسخه انتشار، مانند 5.0.2"
         required: true
-        default: "5.0.3"
+        default: "5.0.4"
   push:
     branches:
       - main
@@ -62,7 +62,7 @@ jobs:
     needs: build
     runs-on: windows-latest
     env:
-      RELEASE_VERSION: ${{ inputs.version || '5.0.3' }}
+      RELEASE_VERSION: ${{ inputs.version || '5.0.4' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
