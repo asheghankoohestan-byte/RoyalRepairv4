@@ -6,7 +6,7 @@ on:
       version:
         description: "شماره نسخه انتشار، مانند 5.0.2"
         required: true
-        default: "5.0.2"
+        default: "5.0.3"
   push:
     branches:
       - main
@@ -62,7 +62,7 @@ jobs:
     needs: build
     runs-on: windows-latest
     env:
-      RELEASE_VERSION: ${{ inputs.version || '5.0.2' }}
+      RELEASE_VERSION: ${{ inputs.version || '5.0.3' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -99,7 +99,7 @@ jobs:
             changelog = @(
               "به‌روزرسانی خودکار اصلاح شد و فایل مناسب معماری ویندوز انتخاب می‌شود.",
               "نسخه‌های ۳۲ و ۶۴ بیتی به‌صورت جداگانه منتشر می‌شوند.",
-              "پیش از جایگزینی برنامه، از پایگاه داده پشتیبان تهیه می‌شود."
+              "پیش از جایگزینی برنامه، از پایگاه داده با تاریخ شمسی پشتیبان تهیه می‌شود."
             )
           }
           $manifest | ConvertTo-Json -Depth 8 | Set-Content -Path version.json -Encoding utf8
@@ -112,6 +112,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add version.json
           git commit -m "Publish updater manifest v$env:RELEASE_VERSION"
+          git pull --rebase origin main
           git push
 
       - name: Create GitHub release
