@@ -16,8 +16,8 @@ import html
 import shutil
 import struct
 
-APP_VERSION = "5.0.2"  # نسخه‌ای که به کاربر نمایش داده می‌شود
-UPDATE_VERSION = "5.0.2"  # نسخه داخلی و پیوسته برای مقایسه آپدیت‌ها
+APP_VERSION = "5.0.3"  # نسخه‌ای که به کاربر نمایش داده می‌شود
+UPDATE_VERSION = "5.0.3"  # نسخه داخلی و پیوسته برای مقایسه آپدیت‌ها
 UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/asheghankoohestan-byte/RoyalRepairv4/main/version.json"
 BASE_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
 DB = BASE_DIR / "tamirat.db"
@@ -283,7 +283,11 @@ def check_for_updates(show_current=True):
         if DB.exists():
             backup_dir = DB.parent / "پشتیبان‌ها"
             backup_dir.mkdir(exist_ok=True)
-            stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            jy, jm, jd = gregorian_to_jalali(
+                date.today().year, date.today().month, date.today().day
+            )
+            time_stamp = datetime.now().strftime("%H%M%S")
+            stamp = f"{jy:04d}{jm:02d}{jd:02d}_{time_stamp}"
             backup_path = backup_dir / f"tamirat_before_update_{stamp}.db"
             with sqlite3.connect(DB) as db_source, sqlite3.connect(backup_path) as db_backup:
                 db_source.backup(db_backup)
