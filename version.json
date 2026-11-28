@@ -1,21 +1,21 @@
 {
-  "architectures": {
-    "x64": {
-      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.3/RoyalRepairShop-x64.exe",
-      "file": "RoyalRepairShop-x64.exe",
-      "sha256": "a436848d7c3f003f8438f9c125b9078f45229f58bbf3916f8631aa85991bb755"
-    },
-    "x86": {
-      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.3/RoyalRepairShop-x86.exe",
-      "file": "RoyalRepairShop-x86.exe",
-      "sha256": "e2f979ca0e3eaa1c75b7c8c5047f31ea2e02f86dbee19517801e80d9f5846d73"
-    }
-  },
-  "display_version": "5.0.3",
-  "update_version": "5.0.3",
   "changelog": [
     "به‌روزرسانی خودکار اصلاح شد و فایل مناسب معماری ویندوز انتخاب می‌شود.",
     "نسخه‌های ۳۲ و ۶۴ بیتی به‌صورت جداگانه منتشر می‌شوند.",
     "پیش از جایگزینی برنامه، از پایگاه داده با تاریخ شمسی پشتیبان تهیه می‌شود."
-  ]
+  ],
+  "architectures": {
+    "x86": {
+      "sha256": "164e626cb43c31609903a1bf702de30c0cb0be769f2090afa1cf700c2735e269",
+      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.4/RoyalRepairShop-x86.exe",
+      "file": "RoyalRepairShop-x86.exe"
+    },
+    "x64": {
+      "sha256": "610313a14d03b826657b9c1c277ee178847a1a22331ebee2d2d5526576cfc60a",
+      "url": "https://github.com/asheghankoohestan-byte/RoyalRepairv4/releases/download/v5.0.4/RoyalRepairShop-x64.exe",
+      "file": "RoyalRepairShop-x64.exe"
+    }
+  },
+  "update_version": "5.0.4",
+  "display_version": "5.0.4"
 }
