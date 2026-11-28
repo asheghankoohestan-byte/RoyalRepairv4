@@ -343,9 +343,11 @@ try { Remove-Item -LiteralPath $PSCommandPath -Force -ErrorAction SilentlyContin
         )
 
         messagebox.showinfo(
-            "آماده‌سازی به‌روزرسانی",
+            f"آماده‌سازی نصب نسخه {latest_display}",
+            f"نسخه فعلی برنامه: {APP_VERSION}\n"
+            f"نسخه جدید آماده نصب: {latest_display}\n\n"
             "فایل جدید دریافت و بررسی شد و از اطلاعات تعمیرگاه پشتیبان تهیه شد. "
-            "برنامه بسته می‌شود؛ پس از بسته‌شدن، نسخه جدید نصب و اجرا خواهد شد."
+            f"پس از بسته‌شدن برنامه، نسخه {latest_display} نصب و اجرا خواهد شد."
         )
         root.destroy()
 
