@@ -1,0 +1,58 @@
+name: Build RoyalRepairShop EXE
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'RoyalRepairShop_GoodsOut_Mashhad.py'
+      - '.github/workflows/build-windows-exe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x64
+            python_arch: x64
+          - arch: x86
+            python_arch: x86
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          architecture: ${{ matrix.python_arch }}
+
+      - name: Install PyInstaller
+        run: python -m pip install --upgrade pip pyinstaller
+
+      - name: Build EXE
+        run: >-
+          python -m PyInstaller --clean --noconfirm --onefile --windowed
+          --name RoyalRepairShop
+          RoyalRepairShop_GoodsOut_Mashhad.py
+
+      - name: Include build instructions
+        shell: pwsh
+        run: |
+          @'
+          RoyalRepairShop - Windows ${{ matrix.arch }}
+
+          Run RoyalRepairShop.exe. Keep tamirat.db beside the EXE when moving an existing installation.
+          '@ | Set-Content -Encoding UTF8 dist/README.txt
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: RoyalRepairShop-Windows-${{ matrix.arch }}
+          path: dist/*
+          if-no-files-found: error
